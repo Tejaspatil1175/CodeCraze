@@ -1,5 +1,3 @@
-import { useState } from "react";
-import IntroVideo from "./components/IntroVideo";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,12 +9,10 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [showIntro, setShowIntro] = useState(true);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        {showIntro && <IntroVideo onComplete={() => setShowIntro(false)} />}
 
         {/* Global Background Video */}
         <div className="fixed inset-0 w-full h-full overflow-hidden z-[-1]">
