@@ -7,66 +7,79 @@ const HeroSection = () => {
       className="relative min-h-screen lg:min-h-[90vh] flex items-center pt-24 pb-10 lg:pt-28 lg:pb-8 overflow-hidden"
     >
 
+      {/* Mobile-Only Decorative Background Elements */}
+      <div className="absolute inset-0 z-0 lg:hidden overflow-hidden pointer-events-none">
+        <div className="absolute top-[20%] left-[-10%] w-[300px] h-[300px] bg-cyan/10 rounded-full blur-[80px] animate-pulse" />
+        <div className="absolute bottom-[20%] right-[-10%] w-[250px] h-[250px] bg-purple/10 rounded-full blur-[80px] animate-pulse delay-700" />
+
+        {/* Floating Particles for mobile richness */}
+        <div className="absolute top-[15%] right-[10%] w-2 h-2 bg-cyan/40 rounded-full animate-bounce delay-100" />
+        <div className="absolute top-[40%] left-[8%] w-1.5 h-1.5 bg-purple/40 rounded-full animate-bounce delay-300" />
+        <div className="absolute bottom-[30%] left-[15%] w-2 h-2 bg-blue-500/30 rounded-full animate-bounce delay-500" />
+      </div>
+
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
         {/* Left Column: Text */}
-        <div className="text-left animate-in slide-in-from-left-10 fade-in duration-700">
+        <div className="text-center lg:text-left animate-in slide-in-from-left-10 fade-in duration-700 flex flex-col items-center lg:items-start">
 
-          <div className="flex items-center gap-2 mb-4 sm:mb-6">
+          <div className="flex items-center justify-center lg:justify-start gap-2 mb-4 sm:mb-6">
             <span className="h-px w-8 bg-cyan"></span>
           </div>
 
-          <h1 className="font-orbitron text-3xl sm:text-5xl lg:text-7xl font-bold leading-[1.1] mb-4 sm:mb-6">
-            Discover the <br />
-            <span className="text-gradient-multiverse relative inline-block">
+          <h1 className="font-orbitron text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.15] mb-4 sm:mb-6 tracking-tight">
+            Discover the <br className="hidden sm:block" />
+            <span className="text-gradient-multiverse relative inline-block px-2">
               secrets
-              <svg className="absolute w-full h-3 -bottom-1 left-0 text-cyan opacity-70" viewBox="0 0 100 10" preserveAspectRatio="none">
+              <svg className="absolute w-full h-3 -bottom-1 left-0 text-cyan/50" viewBox="0 0 100 10" preserveAspectRatio="none">
                 <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" />
               </svg>
-            </span> of <br />
-            <span className="text-white">CodeCraze 3.0</span>
+            </span> <br className="lg:hidden" /> of <br className="hidden lg:block" />
+            <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">CodeCraze 3.0</span>
           </h1>
 
-          <p className="text-muted-foreground text-base sm:text-lg max-w-xl leading-relaxed mb-7 sm:mb-10">
+          <p className="text-muted-foreground text-base sm:text-lg max-w-xl leading-relaxed mb-7 sm:mb-10 mx-auto lg:mx-0">
             Join us on this journey as we explore the concept of the Multiverse of Code.
             Ideate, Prototype, and Deploy in a thriller 24-hour window.
           </p>
 
           {/* CTA Group */}
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
             <a
               href="https://unstop.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-none min-w-[180px] px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-black/40 backdrop-blur-md border border-white/10 hover:border-cyan/50 hover:bg-black/60 transition-all duration-300 flex items-center justify-center gap-4 group"
+              className="flex-1 sm:flex-none min-w-[200px] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-md border border-white/10 hover:border-cyan/50 hover:bg-black/60 transition-all duration-300 flex items-center justify-center gap-4 group shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_25px_rgba(6,182,212,0.25)]"
             >
-              <img src="/unstop-logo.svg" alt="Unstop Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-110 transition-transform duration-300" />
+              <img src="/unstop-logo.svg" alt="Unstop Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
               <div className="flex flex-col items-start leading-none">
-                <span className="text-xl sm:text-2xl font-bold text-white group-hover:text-cyan transition-colors">Register</span>
+                <span className="text-xl sm:text-2xl font-orbitron font-bold text-white group-hover:text-cyan transition-colors">Register</span>
               </div>
             </a>
           </div>
 
           {/* Stats Footer */}
-          <div className="flex gap-6 sm:gap-8 mt-7 sm:mt-10 pt-5 sm:pt-6 border-t border-white/5">
-            <div>
+          <div className="flex justify-center lg:justify-start gap-4 sm:gap-8 mt-8 sm:mt-10 pt-6 sm:pt-6 border-t border-white/5 w-full">
+            <div className="px-2">
               <div className="font-orbitron text-xl sm:text-2xl font-bold text-white">₹22k+</div>
-              <div className="mono text-xs text-muted-foreground">Prize Pool</div>
+              <div className="mono text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest text-cyan/70">Prize Pool</div>
             </div>
-            <div>
+            <div className="h-8 w-px bg-white/5 self-center mx-1 sm:mx-0"></div>
+            <div className="px-2">
               <div className="font-orbitron text-xl sm:text-2xl font-bold text-white">24h</div>
-              <div className="mono text-xs text-muted-foreground">Duration</div>
+              <div className="mono text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest text-purple/70">Duration</div>
             </div>
-            <div>
+            <div className="h-8 w-px bg-white/5 self-center mx-1 sm:mx-0"></div>
+            <div className="px-2">
               <div className="font-orbitron text-xl sm:text-2xl font-bold text-white">50+</div>
-              <div className="mono text-xs text-muted-foreground">Teams</div>
+              <div className="mono text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest text-orange-400/70">Teams</div>
             </div>
           </div>
         </div>
 
         {/* Right Column: Game */}
-        <div className="relative h-[260px] sm:h-[380px] lg:h-[560px] flex items-center justify-center animate-in slide-in-from-right-10 fade-in duration-1000 delay-200">
+        <div className="relative hidden lg:flex lg:h-[560px] items-center justify-center animate-in slide-in-from-right-10 fade-in duration-1000 delay-200">
 
           {/* Abstract glow behind */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] lg:w-[600px] h-[300px] sm:h-[500px] lg:h-[600px] bg-gradient-to-tr from-cyan/20 to-purple/20 rounded-full blur-[80px]" />

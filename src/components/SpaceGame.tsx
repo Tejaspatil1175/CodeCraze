@@ -922,33 +922,59 @@ const SpaceGame = () => {
             window.addEventListener("keydown", onKeyDown);
             window.addEventListener("keyup", onKeyUp);
 
-            const onClick = () => {
+            const onClick = (e: MouseEvent) => {
                   const st = stateRef.current;
-                  if (st.phase === "title" || st.phase === "dead") newGame(canvas);
+                  if (st.phase === "title" || st.phase === "dead") {
+                        newGame(canvas);
+                  }
             };
 
             let touchX = 0;
             const onTouchStart = (e: TouchEvent) => {
                   const st = stateRef.current;
+                  // Prevent scrolling while playing
+                  if (st.phase === "playing") e.preventDefault();
+
                   touchX = e.touches[0].clientX;
-                  if (st.phase === "title" || st.phase === "dead") { newGame(canvas); return; }
+                  if (st.phase === "title" || st.phase === "dead") {
+                        newGame(canvas);
+                        return;
+                  }
                   shoot();
             };
+
             const onTouchMove = (e: TouchEvent) => {
-                  const dx = e.touches[0].clientX - touchX;
-                  touchX = e.touches[0].clientX;
-                  if (dx > 3) { keysRef.current.add("ArrowRight"); keysRef.current.delete("ArrowLeft"); }
-                  if (dx < -3) { keysRef.current.add("ArrowLeft"); keysRef.current.delete("ArrowRight"); }
+                  const st = stateRef.current;
+                  if (st.phase === "playing") e.preventDefault();
+
+                  const currentX = e.touches[0].clientX;
+                  const dx = currentX - touchX;
+
+                  // More sensitive movement for mobile
+                  if (dx > 2) {
+                        keysRef.current.add("ArrowRight");
+                        keysRef.current.delete("ArrowLeft");
+                  } else if (dx < -2) {
+                        keysRef.current.add("ArrowLeft");
+                        keysRef.current.delete("ArrowRight");
+                  } else {
+                        keysRef.current.delete("ArrowLeft");
+                        keysRef.current.delete("ArrowRight");
+                  }
+
+                  // Update touchX for continuous tracking
+                  touchX = currentX;
             };
-            const onTouchEnd = () => {
+
+            const onTouchEnd = (e: TouchEvent) => {
                   keysRef.current.delete("ArrowLeft");
                   keysRef.current.delete("ArrowRight");
             };
 
             canvas.addEventListener("click", onClick);
-            canvas.addEventListener("touchstart", onTouchStart, { passive: true });
-            canvas.addEventListener("touchmove", onTouchMove, { passive: true });
-            canvas.addEventListener("touchend", onTouchEnd, { passive: true });
+            canvas.addEventListener("touchstart", onTouchStart, { passive: false });
+            canvas.addEventListener("touchmove", onTouchMove, { passive: false });
+            canvas.addEventListener("touchend", onTouchEnd, { passive: false });
 
             rafRef.current = requestAnimationFrame(loop);
 
@@ -965,10 +991,10 @@ const SpaceGame = () => {
       }, [loop, newGame, shoot]);
 
       return (
-            <div className="relative w-full h-full select-none bg-[#000814]">
+            <div className="relative w-full h-full select-none bg-[#000814] touch-none">
                   <canvas
                         ref={canvasRef}
-                        className="w-full h-full block cursor-crosshair"
+                        className="w-full h-full block cursor-crosshair touch-none"
                         style={{ imageRendering: "pixelated" }}
                   />
             </div>
