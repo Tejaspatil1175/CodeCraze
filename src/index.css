@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 4%;
+    --foreground: 210 40% 96%;
+
+    --card: 220 20% 7%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 220 20% 7%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 220 20% 4%;
+
+    --secondary: 270 60% 55%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 220 20% 12%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 180 100% 50%;
+    --accent-foreground: 220 20% 4%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 15%;
+    --input: 220 20% 12%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.5rem;
+
+    /* Custom design tokens */
+    --cyan: 180 100% 50%;
+    --purple: 270 60% 55%;
+    --orange: 25 95% 55%;
+    --glow-cyan: 0 0 20px hsl(180 100% 50% / 0.5), 0 0 40px hsl(180 100% 50% / 0.3);
+    --glow-purple: 0 0 20px hsl(270 60% 55% / 0.5), 0 0 40px hsl(270 60% 55% / 0.3);
+    --gradient-hero: linear-gradient(135deg, hsl(220 20% 4%) 0%, hsl(240 30% 8%) 50%, hsl(220 20% 4%) 100%);
+    --gradient-cyan-purple: linear-gradient(135deg, hsl(180 100% 50%), hsl(270 60% 55%));
+    --gradient-card: linear-gradient(135deg, hsl(220 20% 7%), hsl(220 20% 10%));
+    --border-glow: 1px solid hsl(180 100% 50% / 0.3);
+
+    --sidebar-background: 220 20% 4%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 180 100% 50%;
+    --sidebar-primary-foreground: 220 20% 4%;
+    --sidebar-accent: 220 20% 10%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 220 20% 15%;
+    --sidebar-ring: 180 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-transparent text-foreground;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Orbitron', monospace;
+  }
+
+  code,
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .text-gradient-cyan {
+    background: var(--gradient-cyan-purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-cyan {
+    color: hsl(var(--cyan));
+  }
+
+  .text-purple {
+    color: hsl(var(--purple));
+  }
+
+  .text-orange {
+    color: hsl(var(--orange));
+  }
+
+  .glow-cyan {
+    box-shadow: var(--glow-cyan);
+  }
+
+  .glow-purple {
+    box-shadow: var(--glow-purple);
+  }
+
+  .border-cyan {
+    border-color: hsl(var(--cyan) / 0.4);
+  }
+
+  .border-purple {
+    border-color: hsl(var(--purple) / 0.4);
+  }
+
+  .bg-card-dark {
+    background: var(--gradient-card);
+  }
+
+  .card-glow {
+    @apply bg-black/60 backdrop-blur-md;
+    border: 1px solid hsl(var(--cyan) / 0.2);
+    box-shadow: 0 0 20px hsl(var(--cyan) / 0.05), inset 0 0 20px hsl(var(--cyan) / 0.02);
+    transition: all 0.3s ease;
+  }
+
+  .card-glow:hover {
+    @apply bg-black/70;
+    border-color: hsl(var(--cyan) / 0.5);
+    box-shadow: 0 0 30px hsl(var(--cyan) / 0.15), inset 0 0 20px hsl(var(--cyan) / 0.05);
+  }
+
+  .card-glow-purple {
+    @apply bg-black/60 backdrop-blur-md;
+    border: 1px solid hsl(var(--purple) / 0.2);
+    box-shadow: 0 0 20px hsl(var(--purple) / 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .card-glow-purple:hover {
+    @apply bg-black/70;
+    border-color: hsl(var(--purple) / 0.5);
+    box-shadow: 0 0 30px hsl(var(--purple) / 0.15);
+  }
+
+  .section-divider {
+    background: linear-gradient(90deg, transparent, hsl(var(--cyan) / 0.5), transparent);
+    height: 1px;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--cyan) / 0.4);
+  border-radius: 3px;
+}
+
+/* Animated grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(hsl(180 100% 50% / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(180 100% 50% / 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.card-glow-orange {
+  @apply bg-black/60 backdrop-blur-md;
+  border: 1px solid hsl(var(--orange) / 0.2);
+  box-shadow: 0 0 20px hsl(var(--orange) / 0.05);
+  transition: all 0.3s ease;
+}
+
+.card-glow-orange:hover {
+  @apply bg-black/70;
+  border-color: hsl(var(--orange) / 0.5);
+  box-shadow: 0 0 30px hsl(var(--orange) / 0.15);
+}

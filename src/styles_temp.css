@@ -1,0 +1,12 @@
+  .card-glow-orange {
+        @apply bg-black/60 backdrop-blur-md;
+        border: 1px solid hsl(var(--orange) / 0.2);
+        box-shadow: 0 0 20px hsl(var(--orange) / 0.05);
+        transition: all 0.3s ease;
+  }
+
+  .card-glow-orange:hover {
+        @apply bg-black/70;
+        border-color: hsl(var(--orange) / 0.5);
+        box-shadow: 0 0 30px hsl(var(--orange) / 0.15);
+  }
