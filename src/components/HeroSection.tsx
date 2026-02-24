@@ -62,7 +62,7 @@ const HeroSection = () => {
           {/* Stats Footer */}
           <div className="flex justify-center lg:justify-start gap-4 sm:gap-8 mt-8 sm:mt-10 pt-6 sm:pt-6 border-t border-white/5 w-full">
             <div className="px-2">
-              <div className="font-orbitron text-xl sm:text-2xl font-bold text-white">₹22k+</div>
+              <div className="font-orbitron text-xl sm:text-2xl font-bold text-orange-400">TBD</div>
               <div className="mono text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest text-cyan/70">Prize Pool</div>
             </div>
             <div className="h-8 w-px bg-white/5 self-center mx-1 sm:mx-0"></div>

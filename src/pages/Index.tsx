@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import OrganizersSection from "@/components/OrganizersSection";
+import HackathonCoordinators from "@/components/HackathonCoordinators";
 import ClubLeads from "@/components/ClubLeads";
 import PrizeSection from "@/components/PrizeSection";
 import TeamSection from "@/components/TeamSection";
@@ -22,6 +23,7 @@ const Index = () => {
         <DomainsSection />
         <HackathonFlow />
         <WhyParticipate />
+        <HackathonCoordinators />
         <ClubLeads />
         <FAQSection />
       </main>

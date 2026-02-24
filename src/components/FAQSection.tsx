@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "Can we use pre-built code?",
-    a: "No. Pre-built code or previously developed projects are strictly not allowed in Round 2. All solutions must be built from scratch during the 24-hour hackathon.",
+    a: "No. Pre-built code or previously developed projects are strictly not allowed in Round 2. All solutions must be built from scratch during the 60-hour hackathon.",
   },
   {
     q: "Are AI tools allowed?",

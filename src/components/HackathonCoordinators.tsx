@@ -1,74 +1,41 @@
 import { User, Phone, Mail } from "lucide-react";
-import { useState } from "react";
 
-const team = [
+const coordinators = [
       {
-            name: "Tejas Patil",
-            role: "Technical Team",
-            phone: "+91 8788244416",
-            email: "tejaspatil1175@gmail.com",
-            image: "/team/tejas-tech.png",
+            name: "Coordinator Name",
+            role: "Hackathon Coordinator",
+            phone: "+91 0000000000",
+            email: "coordinator1@example.com",
       },
       {
-            name: "Vinit Bari",
-            role: "Club Head",
+            name: "Coordinator Name",
+            role: "Hackathon Coordinator",
             phone: "+91 0000000000",
-            email: "vinit.bari@example.com",
-            image: "/team/head.png",
-      },
-      {
-            name: "Raj Sonavane",
-            role: "Club Co-Head",
-            phone: "+91 0000000000",
-            email: "raj.sonavane@example.com",
-            image: "/team/cohead.png",
-      },
-      {
-            name: "Yash",
-            role: "Technical Team",
-            phone: "+91 0000000000",
-            email: "yash@example.com",
-            image: "/team/yash-tech.png",
+            email: "coordinator2@example.com",
       },
 ];
 
-const MemberAvatar = ({ image, name }: { image: string | null; name: string }) => {
-      const [imgError, setImgError] = useState(false);
-
-      if (image && !imgError) {
-            return (
-                  <img
-                        src={image}
-                        alt={name}
-                        className="w-full h-full object-cover"
-                        onError={() => setImgError(true)}
-                  />
-            );
-      }
-      return <User size={32} className="text-slate-500 group-hover:text-cyan transition-colors" />;
-};
-
-const ClubLeads = () => {
+const HackathonCoordinators = () => {
       return (
             <section className="py-20 px-4 sm:px-6 relative">
                   <div className="section-divider mb-16" />
-                  <div className="max-w-6xl mx-auto">
+                  <div className="max-w-4xl mx-auto">
                         <div className="text-center mb-16">
-                              <div className="mono text-xs text-cyan tracking-widest mb-3">CONTACT US</div>
+                              <div className="mono text-xs text-cyan tracking-widest mb-3 uppercase">Event Leadership</div>
                               <h2 className="text-3xl sm:text-4xl font-black text-foreground mb-4">
-                                    For Any Queries, <span className="text-gradient-cyan">Contact Us</span>
+                                    Hackathon <span className="text-gradient-cyan">Coordinators</span>
                               </h2>
                               <p className="text-muted-foreground max-w-2xl mx-auto">
-                                    Have questions? Reach out to our student coordinators directly.
+                                    The driving force behind CodeCraze 3.0. Reach out to them for event-specific queries.
                               </p>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                              {team.map((member, index) => (
-                                    <div key={index} className="flex items-start gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan/40 hover:bg-cyan/5 transition-all duration-300 group">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-center">
+                              {coordinators.map((member, index) => (
+                                    <div key={index} className="flex items-start gap-4 p-6 rounded-2xl bg-white/5 border border-cyan/20 hover:border-cyan/50 hover:bg-cyan/5 transition-all duration-300 group shadow-[0_0_20px_rgba(6,182,212,0.05)]">
                                           {/* Avatar */}
                                           <div className="w-20 h-20 rounded-full bg-slate-800 flex-shrink-0 flex items-center justify-center overflow-hidden border border-white/10 group-hover:border-cyan/50 transition-colors">
-                                                <MemberAvatar image={member.image} name={member.name} />
+                                                <User size={32} className="text-slate-500 group-hover:text-cyan transition-colors" />
                                           </div>
 
                                           {/* Info */}
@@ -99,4 +66,4 @@ const ClubLeads = () => {
       );
 };
 
-export default ClubLeads;
+export default HackathonCoordinators;
