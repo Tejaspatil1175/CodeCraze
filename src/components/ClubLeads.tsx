@@ -12,30 +12,30 @@ const team = [
       {
             name: "Vinit Bari",
             role: "Club Head",
-            phone: "+91 0000000000",
-            email: "vinit.bari@example.com",
+            phone: "+91 7588737291",
+            email: "Vinitbari1618@gmail.com",
             image: "/team/head.png",
       },
       {
             name: "Raj Sonavane",
             role: "Club Co-Head",
-            phone: "+91 0000000000",
-            email: "raj.sonavane@example.com",
+            phone: "+91 9307133716",
+            email: "mrrajsonawane@gmail.com",
             image: "/team/cohead.png",
       },
       {
             name: "Yash",
             role: "Technical Team",
-            phone: "+91 0000000000",
-            email: "yash@example.com",
-            image: "/team/yash-tech.png",
+            phone: "+91 8459831450",
+            email: "chavanyash2311@gmail.com",
+            image: "/team/yash-tech team.jpeg",
       },
-       {
-            name: "Yash",
+      {
+            name: "Vidhi Borse",
             role: "Technical Team",
-            phone: "+91 0000000000",
-            email: "yash@example.com",
-            image: "/team/yash-tech.png",
+            phone: "+91 9773211453",
+            email: "vidhiborse369@gmail.com",
+            image: "/team/vidi.jpeg",
       },
 ];
 
