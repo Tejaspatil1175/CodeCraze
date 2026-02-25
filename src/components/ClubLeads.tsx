@@ -23,20 +23,20 @@ const team = [
             email: "mrrajsonawane@gmail.com",
             image: "/team/cohead.png",
       },
-      {
-            name: "Yash",
-            role: "Technical Team",
-            phone: "+91 8459831450",
-            email: "chavanyash2311@gmail.com",
-            image: "/team/yash-tech team.jpeg",
-      },
-      {
-            name: "Vidhi Borse",
-            role: "Technical Team",
-            phone: "+91 9773211453",
-            email: "vidhiborse369@gmail.com",
-            image: "/team/vidi.jpeg",
-      },
+      // {
+      //       name: "Yash",
+      //       role: "Technical Team",
+      //       phone: "+91 8459831450",
+      //       email: "chavanyash2311@gmail.com",
+      //       image: "/team/yash-tech team.jpeg",
+      // },
+      // {
+      //       name: "Vidhi Borse",
+      //       role: "Technical Team",
+      //       phone: "+91 9773211453",
+      //       email: "vidhiborse369@gmail.com",
+      //       image: "/team/vidi.jpeg",
+      // },
 ];
 
 const MemberAvatar = ({ image, name }: { image: string | null; name: string }) => {
