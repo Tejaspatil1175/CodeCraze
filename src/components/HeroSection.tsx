@@ -1,6 +1,32 @@
 import SpaceGame from "./SpaceGame";
+import { useState, useEffect } from "react";
+import { Lock } from "lucide-react";
+
+// Registration opens at 3:00 PM IST on Feb 25, 2026
+const OPEN_AT = new Date("2026-02-25T15:00:00+05:30");
+
+const useCountdown = () => {
+  const [timeLeft, setTimeLeft] = useState(() => Math.max(0, OPEN_AT.getTime() - Date.now()));
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      const diff = Math.max(0, OPEN_AT.getTime() - Date.now());
+      setTimeLeft(diff);
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const isOpen = timeLeft === 0;
+  const h = Math.floor(timeLeft / 3600000);
+  const m = Math.floor((timeLeft % 3600000) / 60000);
+  const s = Math.floor((timeLeft % 60000) / 1000);
+  const fmt = (n: number) => String(n).padStart(2, "0");
+
+  return { isOpen, display: `${fmt(h)}:${fmt(m)}:${fmt(s)}` };
+};
 
 const HeroSection = () => {
+  const { isOpen, display } = useCountdown();
   return (
     <section
       id="home"
@@ -45,18 +71,36 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Group */}
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
-            <a
-              href="https://unstop.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 sm:flex-none min-w-[200px] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-md border border-white/10 hover:border-cyan/50 hover:bg-black/60 transition-all duration-300 flex items-center justify-center gap-4 group shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_25px_rgba(6,182,212,0.25)]"
-            >
-              <img src="/unstop-logo.svg" alt="Unstop Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
-              <div className="flex flex-col items-start leading-none">
-                <span className="text-xl sm:text-2xl font-orbitron font-bold text-white group-hover:text-cyan transition-colors">Register</span>
+          <div className="flex flex-col items-center lg:items-start gap-3 w-full sm:w-auto">
+
+            {/* Registration button — locked until 3PM */}
+            {isOpen ? (
+              <a
+                href="https://unstop.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 sm:flex-none min-w-[220px] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-md border border-cyan/50 hover:border-cyan hover:bg-black/60 transition-all duration-300 flex items-center justify-center gap-4 group shadow-[0_0_25px_rgba(6,182,212,0.25)] animate-pulse-once"
+              >
+                <img src="/unstop-logo.svg" alt="Unstop Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
+                <div className="flex flex-col items-start leading-none">
+                  <span className="text-xl sm:text-2xl font-orbitron font-bold text-cyan">Register Now</span>
+                </div>
+              </a>
+            ) : (
+              <div className="flex-1 sm:flex-none min-w-[220px] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center gap-4 cursor-not-allowed opacity-70 relative overflow-hidden">
+                {/* Scanline shimmer */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-[shimmer_2s_infinite] pointer-events-none" />
+                <img src="/unstop-logo.svg" alt="Unstop Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain opacity-40 grayscale" />
+                <div className="flex flex-col items-start leading-none gap-1">
+                  <div className="flex items-center gap-1.5">
+                    <Lock size={12} className="text-white/40" />
+                    <span className="text-sm font-orbitron font-bold text-white/40 uppercase tracking-widest">Registration Locked</span>
+                  </div>
+                  <span className="font-orbitron text-lg font-black text-white/60 tabular-nums tracking-wider">{display}</span>
+                  <span className="mono text-[10px] text-white/30 tracking-widest">OPENS TODAY AT 3:00 PM</span>
+                </div>
               </div>
-            </a>
+            )}
           </div>
 
           {/* Stats Footer */}
@@ -72,7 +116,7 @@ const HeroSection = () => {
             </div>
             <div className="h-8 w-px bg-white/5 self-center mx-1 sm:mx-0"></div>
             <div className="px-2">
-              <div className="font-orbitron text-xl sm:text-2xl font-bold text-white">50+</div>
+              <div className="font-orbitron text-xl sm:text-2xl font-bold text-white">40+</div>
               <div className="mono text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest text-orange-400/70">Teams</div>
             </div>
           </div>

@@ -30,6 +30,13 @@ const team = [
             email: "yash@example.com",
             image: "/team/yash-tech.png",
       },
+       {
+            name: "Yash",
+            role: "Technical Team",
+            phone: "+91 0000000000",
+            email: "yash@example.com",
+            image: "/team/yash-tech.png",
+      },
 ];
 
 const MemberAvatar = ({ image, name }: { image: string | null; name: string }) => {
@@ -100,3 +107,5 @@ const ClubLeads = () => {
 };
 
 export default ClubLeads;
+
+

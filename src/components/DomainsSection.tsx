@@ -1,34 +1,34 @@
-import { Landmark, Stethoscope, Leaf, Factory, Wheat } from "lucide-react";
+import { Stethoscope, GraduationCap, Sprout, Building2, ShieldCheck } from "lucide-react";
 
 const domains = [
   {
-    icon: Landmark,
-    name: "Fintech",
-    desc: "Innovative financial technologies, digital banking solutions, secure payment systems, and financial inclusion strategies.",
-    color: "cyan",
-  },
-  {
     icon: Stethoscope,
-    name: "Health Tech",
-    desc: "Technology-driven healthcare solutions, telemedicine, patient monitoring, and digital health records.",
-    color: "purple",
-  },
-  {
-    icon: Leaf,
-    name: "Sustainability",
-    desc: "Green technologies, renewable energy, waste management, and eco-friendly innovations for a better future.",
+    name: "Health Care",
+    desc: "Technology-driven healthcare solutions, telemedicine, patient monitoring, diagnostics, and accessible medical innovations.",
     color: "cyan",
   },
   {
-    icon: Factory,
-    name: "Industrial Automation",
-    desc: "Smart manufacturing, IoT in industry, automated workflows, and efficiency improvements for factories.",
+    icon: GraduationCap,
+    name: "EduTech",
+    desc: "Smart learning platforms, personalized education, skill development tools, and tech-driven academic solutions.",
     color: "purple",
   },
   {
-    icon: Wheat,
-    name: "Agritech",
-    desc: "Smart farming solutions, crop monitoring, precision agriculture, and supply chain optimization for farmers.",
+    icon: Sprout,
+    name: "Agriculture",
+    desc: "Smart farming, crop monitoring, precision agriculture, supply chain optimization, and agri-tech innovations for farmers.",
+    color: "cyan",
+  },
+  {
+    icon: Building2,
+    name: "Civic Tech",
+    desc: "Digital governance, public service automation, smart city infrastructure, and citizen engagement platforms.",
+    color: "purple",
+  },
+  {
+    icon: ShieldCheck,
+    name: "Women's Safety",
+    desc: "Technology solutions for personal safety, emergency response, awareness platforms, and community protection for women.",
     color: "cyan",
   },
 ];
@@ -59,8 +59,8 @@ const DomainsSection = () => {
               >
                 <div
                   className={`w-12 h-12 rounded-lg flex items-center justify-center mb-5 border transition-all duration-300 ${isCyan
-                      ? "border-cyan/30 bg-cyan/10 text-cyan group-hover:bg-cyan/20"
-                      : "border-purple/30 bg-purple/10 text-purple group-hover:bg-purple/20"
+                    ? "border-cyan/30 bg-cyan/10 text-cyan group-hover:bg-cyan/20"
+                    : "border-purple/30 bg-purple/10 text-purple group-hover:bg-purple/20"
                     }`}
                 >
                   <Icon size={22} />
