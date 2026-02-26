@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
+import NoticeBanner from "@/components/NoticeBanner";
 import HeroSection from "@/components/HeroSection";
 import OrganizersSection from "@/components/OrganizersSection";
 import HackathonCoordinators from "@/components/HackathonCoordinators";
@@ -12,9 +14,16 @@ import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  // Actual pixel height of the banner — measured dynamically via ResizeObserver
+  const [bannerHeight, setBannerHeight] = useState(0);
+
   return (
     <div className="min-h-screen bg-transparent">
-      <Navbar />
+      <NoticeBanner
+        onDismiss={() => setBannerHeight(0)}
+        onHeightChange={setBannerHeight}
+      />
+      <Navbar bannerHeight={bannerHeight} />
       <main>
         <HeroSection />
         <OrganizersSection />

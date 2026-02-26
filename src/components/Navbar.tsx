@@ -10,11 +10,21 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
-const Navbar = () => {
+interface NavbarProps {
+  bannerHeight?: number;
+}
+
+const Navbar = ({ bannerHeight = 0 }: NavbarProps) => {
   const [open, setOpen] = useState(false);
 
+  // top = banner height + 8px gap. Falls back to 16px (top-4) when no banner.
+  const topOffset = bannerHeight > 0 ? bannerHeight + 8 : 16;
+
   return (
-    <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl rounded-2xl border border-cyan/40 shadow-[0_0_15px_rgba(6,182,212,0.15)] backdrop-blur-md bg-background/70 transition-all duration-300 ${open ? "bg-background/95" : ""}`}>
+    <nav
+      className={`fixed left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl rounded-2xl border border-cyan/40 shadow-[0_0_15px_rgba(6,182,212,0.15)] backdrop-blur-md bg-background/70 transition-all duration-500 ${open ? "bg-background/95" : ""}`}
+      style={{ top: `${topOffset}px` }}
+    >
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -36,7 +46,7 @@ const Navbar = () => {
             ))}
 
             <div className="flex items-center gap-3 ml-2 pl-6 border-l border-white/10">
-              <a href="https://docs.google.com/presentation/d/10wtslG4Qg01Rno6OPg9gecfdJqavBr08/edit?usp=sharing&ouid=106649993752560187038&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full border border-cyan/50 bg-cyan/5 text-cyan hover:bg-cyan/20 transition-all duration-300 text-xs font-orbitron tracking-wide whitespace-nowrap">
+              <a href="https://docs.google.com/presentation/d/1clbR3_r71ku3rxmLdHmAFs6aZPqc2ogo/edit?slide=id.p1#slide=id.p1" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full border border-cyan/50 bg-cyan/5 text-cyan hover:bg-cyan/20 transition-all duration-300 text-xs font-orbitron tracking-wide whitespace-nowrap">
                 <FileText size={14} />
                 <span>Templates</span>
               </a>
