@@ -76,7 +76,7 @@ const HeroSection = () => {
             {/* Registration button — locked until 3PM */}
             {isOpen ? (
               <a
-                href="https://unstop.com"
+                href="https://unstop.com/o/pL7F1yV?lb=CLkvmGT&utm_medium=Share&utm_source=online_coding_challenge&utm_campaign=Deorepus8679"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 sm:flex-none min-w-[220px] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-md border border-cyan/50 hover:border-cyan hover:bg-black/60 transition-all duration-300 flex items-center justify-center gap-4 group shadow-[0_0_25px_rgba(6,182,212,0.25)] animate-pulse-once"

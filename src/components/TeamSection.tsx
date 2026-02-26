@@ -3,9 +3,9 @@ import { Users, Check, X } from "lucide-react";
 const teamSizes = [1, 2, 3, 4];
 
 const rules = [
+  { text: "No Solo Participation — Collaboration is the key to breakthrough ideas", allowed: false },
   { text: "Minimum 2 Members — Every great innovation needs a collaborator", allowed: true },
   { text: "Maximum 4 Members — Small teams move fast and build faster", allowed: true },
-  { text: "No Solo Participation — Collaboration is the key to breakthrough ideas", allowed: false },
   { text: "Cross-Discipline Welcome — Mix skills for maximum impact", allowed: true },
 ];
 

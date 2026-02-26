@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import OrganizersSection from "@/components/OrganizersSection";
 import HackathonCoordinators from "@/components/HackathonCoordinators";
-import ClubLeads from "@/components/ClubLeads";
+// import ClubLeads from "@/components/ClubLeads";
 import PrizeSection from "@/components/PrizeSection";
 import TeamSection from "@/components/TeamSection";
 import DomainsSection from "@/components/DomainsSection";
@@ -24,7 +24,7 @@ const Index = () => {
         <HackathonFlow />
         <WhyParticipate />
         <HackathonCoordinators />
-        <ClubLeads />
+        {/* <ClubLeads /> */}
         <FAQSection />
       </main>
       <Footer />
