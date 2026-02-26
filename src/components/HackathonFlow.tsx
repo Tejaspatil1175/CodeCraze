@@ -237,7 +237,7 @@ const HackathonFlow = () => {
 
                     {/* Download Template Button (Only for Round 1) */}
                     {round.num === "01" && (
-                      <a href="#" className="flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg border border-cyan/50 bg-cyan/10 text-cyan hover:bg-cyan/20 transition-all font-orbitron text-xs font-bold tracking-wide group">
+                      <a href="https://docs.google.com/presentation/d/10wtslG4Qg01Rno6OPg9gecfdJqavBr08/edit?usp=sharing&ouid=106649993752560187038&rtpof=true&sd=true" className="flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg border border-cyan/50 bg-cyan/10 text-cyan hover:bg-cyan/20 transition-all font-orbitron text-xs font-bold tracking-wide group">
                         <span className="group-hover:translate-x-1 transition-transform inline-block">Download Template</span>
                       </a>
                     )}
