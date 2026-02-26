@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Bell, ChevronRight, CheckCircle2, AlertTriangle, ExternalLink, MessageCircle } from "lucide-react";
+import { X, Bell, ChevronRight, CheckCircle2, AlertTriangle, ExternalLink, MessageCircle, Instagram } from "lucide-react";
 
 const WHATSAPP_LINK = "https://chat.whatsapp.com/IE6RwQ5yhOx5JfYDu14Hxd";
+const INSTAGRAM_LINK = "https://www.instagram.com/fetch.ai.rcpit/";
 
 interface NoticeBannerProps {
       onDismiss: () => void;
@@ -210,6 +211,27 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                                 </a>
                                           </div>
 
+                                          {/* Instagram */}
+                                          <div className="flex items-center gap-3 p-3 rounded-xl border border-pink-500/30" style={{ background: 'linear-gradient(135deg, rgba(131,58,180,0.15), rgba(253,29,29,0.1), rgba(252,176,69,0.1))' }}>
+                                                <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full border border-pink-500/40" style={{ background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)', opacity: 0.85 }}>
+                                                      <Instagram size={15} className="text-white" />
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                      <p className="text-xs font-semibold text-pink-300">Follow us on Instagram</p>
+                                                      <p className="text-[10px] text-white/50 mt-0.5">@fetch.ai.rcpit — Updates &amp; highlights</p>
+                                                </div>
+                                                <a
+                                                      href={INSTAGRAM_LINK}
+                                                      target="_blank"
+                                                      rel="noopener noreferrer"
+                                                      className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white text-[10px] font-orbitron font-bold hover:opacity-90 transition-all duration-200 whitespace-nowrap"
+                                                      style={{ background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)' }}
+                                                >
+                                                      <span>Follow</span>
+                                                      <ExternalLink size={9} />
+                                                </a>
+                                          </div>
+
                                           <p className="text-xs text-white/40 leading-relaxed border-t border-white/5 pt-3">
                                                 ⚠️ If you still face any issues, please contact the organizing team immediately.
                                           </p>
@@ -227,6 +249,16 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                                       <span>View PPT</span>
                                                       <ExternalLink size={11} />
                                                 </a>
+                                                {/* <a
+                                                      href={INSTAGRAM_LINK}
+                                                      target="_blank"
+                                                      rel="noopener noreferrer"
+                                                      className="flex items-center gap-2 px-3 py-2 rounded-full text-white text-xs font-orbitron font-bold hover:opacity-90 transition-all duration-200"
+                                                      style={{ background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)' }}
+                                                >
+                                                      <Instagram size={11} />
+                                                      <span>Instagram</span>
+                                                </a> */}
                                                 {/* <a
                                                       href={WHATSAPP_LINK}
                                                       target="_blank"
