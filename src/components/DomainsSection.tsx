@@ -84,7 +84,7 @@ const domains = [
   },
   {
     icon: Building2,
-    name: "Civic Tech",
+    name: "Government Tech",
     desc: "Digital governance, public service automation, smart city infrastructure, and citizen engagement platforms.",
     color: "purple",
     details: {
