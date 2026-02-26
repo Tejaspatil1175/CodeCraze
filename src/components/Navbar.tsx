@@ -36,7 +36,7 @@ const Navbar = () => {
             ))}
 
             <div className="flex items-center gap-3 ml-2 pl-6 border-l border-white/10">
-              <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-full border border-cyan/50 bg-cyan/5 text-cyan hover:bg-cyan/20 transition-all duration-300 text-xs font-orbitron tracking-wide whitespace-nowrap">
+              <a href="https://docs.google.com/presentation/d/10wtslG4Qg01Rno6OPg9gecfdJqavBr08/edit?usp=sharing&ouid=106649993752560187038&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full border border-cyan/50 bg-cyan/5 text-cyan hover:bg-cyan/20 transition-all duration-300 text-xs font-orbitron tracking-wide whitespace-nowrap">
                 <FileText size={14} />
                 <span>Templates</span>
               </a>
@@ -74,7 +74,7 @@ const Navbar = () => {
           ))}
 
           <div className="flex flex-col gap-3 mt-2 pt-4 border-t border-white/5">
-            <a href="#" className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-cyan/50 bg-cyan/5 text-cyan hover:bg-cyan/20 transition-all text-xs font-orbitron tracking-wide">
+            <a href="https://docs.google.com/presentation/d/10wtslG4Qg01Rno6OPg9gecfdJqavBr08/edit?usp=sharing&ouid=106649993752560187038&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-cyan/50 bg-cyan/5 text-cyan hover:bg-cyan/20 transition-all text-xs font-orbitron tracking-wide">
               <FileText size={14} />
               <span>Submission Templates</span>
             </a>
