@@ -11,10 +11,6 @@ const faqs = [
     a: "Teams must have a minimum of 2 and a maximum of 4 members. Solo participation is not allowed. Cross-disciplinary teams are highly encouraged.",
   },
   {
-    q: "Are Round 1 and Round 2 problem statements the same?",
-    a: "No. Round 1 uses pre-defined problem statements from the given domains. Round 2 problem statements are entirely new and revealed only on the event day to ensure fair competition.",
-  },
-  {
     q: "Can we use pre-built code?",
     a: "No. Pre-built code or previously developed projects are strictly not allowed in Round 2. All solutions must be built from scratch during the 60-hour hackathon.",
   },
