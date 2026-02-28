@@ -1,32 +1,50 @@
 import SpaceGame from "./SpaceGame";
-import { useState, useEffect } from "react";
-import { Lock } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Lock, Timer } from "lucide-react";
 
 // Registration opens at 3:00 PM IST on Feb 25, 2026
 const OPEN_AT = new Date("2026-02-25T15:00:00+05:30");
+// Registration closes at 12:00 PM IST on Mar 1, 2026
+const CLOSE_AT = new Date("2026-03-01T12:00:00+05:30");
 
 const useCountdown = () => {
-  const [timeLeft, setTimeLeft] = useState(() => Math.max(0, OPEN_AT.getTime() - Date.now()));
+  const [openTimeLeft, setOpenTimeLeft] = useState(() => Math.max(0, OPEN_AT.getTime() - Date.now()));
+  const [closeTimeLeft, setCloseTimeLeft] = useState(() => Math.max(0, CLOSE_AT.getTime() - Date.now()));
 
   useEffect(() => {
     const id = setInterval(() => {
-      const diff = Math.max(0, OPEN_AT.getTime() - Date.now());
-      setTimeLeft(diff);
+      setOpenTimeLeft(Math.max(0, OPEN_AT.getTime() - Date.now()));
+      setCloseTimeLeft(Math.max(0, CLOSE_AT.getTime() - Date.now()));
     }, 1000);
     return () => clearInterval(id);
   }, []);
 
-  const isOpen = timeLeft === 0;
-  const h = Math.floor(timeLeft / 3600000);
-  const m = Math.floor((timeLeft % 3600000) / 60000);
-  const s = Math.floor((timeLeft % 60000) / 1000);
+  const isOpen = openTimeLeft === 0;
+  const isClosed = closeTimeLeft === 0;
+
+  // Format for pre-open countdown
+  const h = Math.floor(openTimeLeft / 3600000);
+  const m = Math.floor((openTimeLeft % 3600000) / 60000);
+  const s = Math.floor((openTimeLeft % 60000) / 1000);
   const fmt = (n: number) => String(n).padStart(2, "0");
 
-  return { isOpen, display: `${fmt(h)}:${fmt(m)}:${fmt(s)}` };
+  // Format for closing countdown
+  const cd = closeTimeLeft;
+  const days = Math.floor(cd / 86400000);
+  const hours = Math.floor((cd % 86400000) / 3600000);
+  const mins = Math.floor((cd % 3600000) / 60000);
+  const secs = Math.floor((cd % 60000) / 1000);
+
+  return {
+    isOpen,
+    isClosed,
+    display: `${fmt(h)}:${fmt(m)}:${fmt(s)}`,
+    closeDisplay: { days, hours, mins, secs, fmt },
+  };
 };
 
 const HeroSection = () => {
-  const { isOpen, display } = useCountdown();
+  const { isOpen, isClosed, display, closeDisplay } = useCountdown();
   return (
     <section
       id="home"
@@ -73,20 +91,8 @@ const HeroSection = () => {
           {/* CTA Group */}
           <div className="flex flex-col items-center lg:items-start gap-3 w-full sm:w-auto">
 
-            {/* Registration button — locked until 3PM */}
-            {isOpen ? (
-              <a
-                href="https://unstop.com/o/pL7F1yV?lb=CLkvmGT&utm_medium=Share&utm_source=online_coding_challenge&utm_campaign=Deorepus8679"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 sm:flex-none min-w-[220px] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-md border border-cyan/50 hover:border-cyan hover:bg-black/60 transition-all duration-300 flex items-center justify-center gap-4 group shadow-[0_0_25px_rgba(6,182,212,0.25)] animate-pulse-once"
-              >
-                <img src="/unstop-logo.svg" alt="Unstop Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
-                <div className="flex flex-col items-start leading-none">
-                  <span className="text-xl sm:text-2xl font-orbitron font-bold text-cyan">Register Now</span>
-                </div>
-              </a>
-            ) : (
+            {/* Registration button */}
+            {!isOpen ? (
               <div className="flex-1 sm:flex-none min-w-[220px] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center gap-4 cursor-not-allowed opacity-70 relative overflow-hidden">
                 {/* Scanline shimmer */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-[shimmer_2s_infinite] pointer-events-none" />
@@ -98,6 +104,61 @@ const HeroSection = () => {
                   </div>
                   <span className="font-orbitron text-lg font-black text-white/60 tabular-nums tracking-wider">{display}</span>
                   <span className="mono text-[10px] text-white/30 tracking-widest">OPENS TODAY AT 3:00 PM</span>
+                </div>
+              </div>
+            ) : isClosed ? (
+              <div className="flex-1 sm:flex-none min-w-[220px] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-black/40 backdrop-blur-md border border-red-500/30 flex items-center justify-center gap-4 cursor-not-allowed opacity-60">
+                <img src="/unstop-logo.svg" alt="Unstop Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain grayscale opacity-50" />
+                <div className="flex flex-col items-start leading-none gap-1">
+                  <div className="flex items-center gap-1.5">
+                    <Lock size={12} className="text-red-400/60" />
+                    <span className="text-sm font-orbitron font-bold text-red-400/60 uppercase tracking-widest">Registration Closed</span>
+                  </div>
+                  <span className="mono text-[10px] text-white/30 tracking-widest">1 MARCH · 12:00 PM IST</span>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-row items-center gap-3 flex-wrap">
+                <a
+                  href="https://unstop.com/o/pL7F1yV?lb=CLkvmGT&utm_medium=Share&utm_source=online_coding_challenge&utm_campaign=Deorepus8679"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-none px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-md border border-cyan/50 hover:border-cyan hover:bg-black/60 transition-all duration-300 flex items-center justify-center gap-4 group shadow-[0_0_25px_rgba(6,182,212,0.25)] animate-pulse-once"
+                >
+                  <img src="/unstop-logo.svg" alt="Unstop Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
+                  <div className="flex flex-col items-start leading-none gap-1">
+                    <span className="text-xl sm:text-2xl font-orbitron font-bold text-cyan">Register Now</span>
+                    <span className="mono text-[10px] text-white/40 tracking-widest uppercase">via Unstop</span>
+                  </div>
+                </a>
+                {/* Closing deadline badge — side of button */}
+                <div className="flex flex-col items-start gap-1.5 px-4 py-3 rounded-xl bg-[#0d0505] border border-red-500/70 shadow-[0_0_18px_rgba(239,68,68,0.3)] backdrop-blur-sm">
+                  {/* Label row */}
+                  <div className="flex items-center gap-1.5">
+                    <Timer size={11} className="text-red-400 animate-pulse flex-shrink-0" />
+                    <span className="font-orbitron text-[9px] font-bold text-red-400 tracking-[0.15em] uppercase">Registration Closes In</span>
+                  </div>
+                  {/* Countdown digits */}
+                  <div className="flex items-center gap-1.5">
+                    {([
+                      { val: closeDisplay.days, label: 'D' },
+                      { val: closeDisplay.hours, label: 'H' },
+                      { val: closeDisplay.mins, label: 'M' },
+                      { val: closeDisplay.secs, label: 'S' },
+                    ] as { val: number; label: string }[]).map(({ val, label }, i) => (
+                      <React.Fragment key={label}>
+                        {i > 0 && <span className="text-red-500/50 font-black text-sm mb-2">:</span>}
+                        <div className="flex flex-col items-center bg-red-950/60 border border-red-500/30 rounded-md px-2 py-1 min-w-[32px]">
+                          <span className="font-orbitron font-black text-red-300 tabular-nums text-sm leading-none">
+                            {closeDisplay.fmt(val)}
+                          </span>
+                          <span className="mono text-[8px] text-red-400/60 tracking-widest uppercase leading-none mt-0.5">{label}</span>
+                        </div>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                  {/* Deadline text */}
+                  <span className="mono text-[9px] text-red-300/60 tracking-widest">1 MARCH 2026 · 12:00 PM IST</span>
                 </div>
               </div>
             )}
