@@ -4,8 +4,8 @@ import { X, Bell, ChevronRight, CheckCircle2, AlertTriangle, ExternalLink, Messa
 const WHATSAPP_LINK = "https://chat.whatsapp.com/IE6RwQ5yhOx5JfYDu14Hxd";
 const INSTAGRAM_LINK = "https://www.instagram.com/fetch.ai.rcpit/";
 
-// Registration closes: March 1 2026, 12:00 PM IST
-const REG_CLOSE_TIME = new Date("2026-03-01T12:00:00+05:30");
+// Registration closes: March 1 2026, 8:00 PM IST
+const REG_CLOSE_TIME = new Date("2026-03-01T20:00:00+05:30");
 
 interface NoticeBannerProps {
       onDismiss: () => void;
@@ -113,7 +113,7 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                     </div>
 
                                     {regClosed ? (
-                                          /* ── AFTER 12 PM: Registration Closed ── */
+                                          /* ── AFTER 8 PM: Registration Closed ── */
                                           <>
                                                 <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-500 text-black text-[9px] font-orbitron font-bold tracking-widest uppercase flex-shrink-0 animate-pulse">
                                                       Update
@@ -124,13 +124,13 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                                 </p>
                                           </>
                                     ) : (
-                                          /* ── BEFORE 12 PM: Countdown ── */
+                                          /* ── BEFORE 8 PM: Countdown ── */
                                           <>
                                                 <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-red-500 text-white text-[9px] font-orbitron font-bold tracking-widest uppercase flex-shrink-0 animate-pulse">
                                                       Urgent
                                                 </span>
                                                 <p className="text-xs sm:text-sm text-white/90 font-medium text-center leading-snug">
-                                                      <span className="text-red-400 font-semibold">Registration closes today at 12 PM!</span>{" "}
+                                                      <span className="text-red-400 font-semibold">Registration closes today at 8 PM!</span>{" "}
                                                       <span className="text-cyan font-mono font-bold">
                                                             {pad(countdown.hours)}h {pad(countdown.minutes)}m {pad(countdown.seconds)}s
                                                       </span>
@@ -208,7 +208,7 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                     {/* Body */}
                                     <div className="px-6 py-5 space-y-4">
                                           {regClosed ? (
-                                                /* ── AFTER 12 PM MODAL BODY ── */
+                                                /* ── AFTER 8 PM MODAL BODY ── */
                                                 <>
                                                       <p className="text-sm text-white/80 leading-relaxed">
                                                             Registrations for <span className="text-cyan font-semibold">CodeCraze 3.0</span> have officially closed. Thank you to everyone who participated!
@@ -230,12 +230,12 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                                       </div>
                                                 </>
                                           ) : (
-                                                /* ── BEFORE 12 PM MODAL BODY ── */
+                                                /* ── BEFORE 8 PM MODAL BODY ── */
                                                 <>
                                                       <p className="text-sm text-white/80 leading-relaxed">
                                                             This is your last chance! Registration for{" "}
                                                             <span className="text-cyan font-semibold">CodeCraze 3.0</span> closes{" "}
-                                                            <span className="text-red-400 font-semibold">today at 12:00 PM.</span>
+                                                            <span className="text-red-400 font-semibold">today at 8:00 PM.</span>
                                                       </p>
 
                                                       {/* Countdown Block */}
@@ -304,18 +304,6 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                                       <span>Follow</span>
                                                       <ExternalLink size={9} />
                                                 </a>
-                                          </div>
-
-                                          <p className="text-xs text-white/40 leading-relaxed border-t border-white/5 pt-3">
-                                                {regClosed
-                                                      ? "📢 Keep an eye on our WhatsApp community and Instagram for result announcements."
-                                                      : "⚠️ Registrations close at 12:00 PM today. No late entries will be accepted."}
-                                          </p>
-                                    </div>
-
-                                    {/* Footer */}
-                                    <div className="px-6 py-4 border-t border-white/5 bg-white/[0.02] flex flex-wrap items-center justify-between gap-3">
-                                          <div className="flex flex-wrap items-center gap-2">
                                                 <a
                                                       href="https://docs.google.com/presentation/d/1clbR3_r71ku3rxmLdHmAFs6aZPqc2ogo/edit?slide=id.p1#slide=id.p1"
                                                       target="_blank"

@@ -4,8 +4,8 @@ import { Lock, Timer } from "lucide-react";
 
 // Registration opens at 3:00 PM IST on Feb 25, 2026
 const OPEN_AT = new Date("2026-02-25T15:00:00+05:30");
-// Registration closes at 12:00 PM IST on Mar 1, 2026
-const CLOSE_AT = new Date("2026-03-01T12:00:00+05:30");
+// Registration closes at 8:00 PM IST on Mar 1, 2026
+const CLOSE_AT = new Date("2026-03-01T20:00:00+05:30");
 
 const useCountdown = () => {
   const [openTimeLeft, setOpenTimeLeft] = useState(() => Math.max(0, OPEN_AT.getTime() - Date.now()));
@@ -114,7 +114,7 @@ const HeroSection = () => {
                     <Lock size={12} className="text-red-400/60" />
                     <span className="text-sm font-orbitron font-bold text-red-400/60 uppercase tracking-widest">Registration Closed</span>
                   </div>
-                  <span className="mono text-[10px] text-white/30 tracking-widest">1 MARCH · 12:00 PM IST</span>
+                  <span className="mono text-[10px] text-white/30 tracking-widest">1 MARCH · 8:00 PM IST</span>
                 </div>
               </div>
             ) : (
@@ -158,7 +158,7 @@ const HeroSection = () => {
                     ))}
                   </div>
                   {/* Deadline text */}
-                  <span className="mono text-[9px] text-red-300/60 tracking-widest">1 MARCH 2026 · 12:00 PM IST</span>
+                  <span className="mono text-[9px] text-red-300/60 tracking-widest">1 MARCH 2026 · 8:00 PM IST</span>
                 </div>
               </div>
             )}
