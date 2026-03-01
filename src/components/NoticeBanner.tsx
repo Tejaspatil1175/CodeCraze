@@ -1,19 +1,49 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Bell, ChevronRight, CheckCircle2, AlertTriangle, ExternalLink, MessageCircle, Instagram } from "lucide-react";
+import { X, Bell, ChevronRight, CheckCircle2, AlertTriangle, ExternalLink, MessageCircle, Instagram, Clock, Trophy } from "lucide-react";
 
 const WHATSAPP_LINK = "https://chat.whatsapp.com/IE6RwQ5yhOx5JfYDu14Hxd";
 const INSTAGRAM_LINK = "https://www.instagram.com/fetch.ai.rcpit/";
+
+// Registration closes: March 1 2026, 12:00 PM IST
+const REG_CLOSE_TIME = new Date("2026-03-01T12:00:00+05:30");
 
 interface NoticeBannerProps {
       onDismiss: () => void;
       onHeightChange: (h: number) => void;
 }
 
+function useCountdown(target: Date) {
+      const calc = () => {
+            const diff = target.getTime() - Date.now();
+            if (diff <= 0) return { hours: 0, minutes: 0, seconds: 0, done: true };
+            const totalSec = Math.floor(diff / 1000);
+            return {
+                  hours: Math.floor(totalSec / 3600),
+                  minutes: Math.floor((totalSec % 3600) / 60),
+                  seconds: totalSec % 60,
+                  done: false,
+            };
+      };
+
+      const [state, setState] = useState(calc);
+
+      useEffect(() => {
+            const id = setInterval(() => setState(calc()), 1000);
+            return () => clearInterval(id);
+      }, []);
+
+      return state;
+}
+
+const pad = (n: number) => String(n).padStart(2, "0");
+
 const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
       const [show, setShow] = useState(false);
       const [hiding, setHiding] = useState(false);
       const [modalOpen, setModalOpen] = useState(false);
       const bannerRef = useRef<HTMLDivElement>(null);
+      const countdown = useCountdown(REG_CLOSE_TIME);
+      const regClosed = countdown.done;
 
       // Appear on load (unless dismissed this session)
       useEffect(() => {
@@ -24,17 +54,24 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
             }
       }, []);
 
-      // Measure actual banner height dynamically (handles mobile text-wrap)
+      // Auto-open the popup on load (first time)
+      useEffect(() => {
+            if (show) {
+                  const alreadyOpened = sessionStorage.getItem("noticeModalOpened");
+                  if (!alreadyOpened) {
+                        setModalOpen(true);
+                        sessionStorage.setItem("noticeModalOpened", "true");
+                  }
+            }
+      }, [show]);
+
+      // Measure actual banner height dynamically
       useEffect(() => {
             if (!show || !bannerRef.current) return;
-
             const updateHeight = () => {
-                  if (bannerRef.current) {
-                        onHeightChange(bannerRef.current.offsetHeight);
-                  }
+                  if (bannerRef.current) onHeightChange(bannerRef.current.offsetHeight);
             };
             updateHeight();
-
             const ro = new ResizeObserver(updateHeight);
             ro.observe(bannerRef.current);
             return () => ro.disconnect();
@@ -58,20 +95,14 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                   {/* ── Top Banner ── */}
                   <div
                         ref={bannerRef}
-                        className={`fixed top-0 left-0 right-0 z-[70] transition-all duration-350 ${hiding ? "opacity-0 -translate-y-full" : "opacity-100 translate-y-0"
-                              }`}
+                        className={`fixed top-0 left-0 right-0 z-[70] transition-all duration-350 ${hiding ? "opacity-0 -translate-y-full" : "opacity-100 translate-y-0"}`}
                   >
-                        {/* Top glow line */}
                         <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-cyan to-transparent" />
-
                         <div
                               className="relative bg-background/95 backdrop-blur-md border-b border-cyan/30 shadow-[0_4px_20px_rgba(6,182,212,0.15)] cursor-pointer group"
                               onClick={() => setModalOpen(true)}
                         >
-                              {/* Shimmer bg */}
                               <div className="absolute inset-0 bg-gradient-to-r from-cyan/5 via-transparent to-cyan/5 animate-pulse pointer-events-none" />
-
-                              {/* Content — flex-wrap so it never overflows on mobile */}
                               <div className="relative px-4 py-2.5 pr-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 max-w-7xl mx-auto">
                                     {/* Pulsing bell */}
                                     <div className="relative flex-shrink-0">
@@ -81,18 +112,33 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                           </div>
                                     </div>
 
-                                    {/* Badge — kept on all sizes for mobile clarity */}
-                                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-red-500 text-white text-[9px] font-orbitron font-bold tracking-widest uppercase flex-shrink-0 animate-pulse">
-                                          Important
-                                    </span>
+                                    {regClosed ? (
+                                          /* ── AFTER 12 PM: Registration Closed ── */
+                                          <>
+                                                <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-500 text-black text-[9px] font-orbitron font-bold tracking-widest uppercase flex-shrink-0 animate-pulse">
+                                                      Update
+                                                </span>
+                                                <p className="text-xs sm:text-sm text-white/90 font-medium text-center leading-snug">
+                                                      <span className="text-red-400 font-semibold">Registration is now closed.</span>{" "}
+                                                      <span className="text-amber-300 font-semibold">Results will be posted soon — stay tuned!</span>
+                                                </p>
+                                          </>
+                                    ) : (
+                                          /* ── BEFORE 12 PM: Countdown ── */
+                                          <>
+                                                <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-red-500 text-white text-[9px] font-orbitron font-bold tracking-widest uppercase flex-shrink-0 animate-pulse">
+                                                      Urgent
+                                                </span>
+                                                <p className="text-xs sm:text-sm text-white/90 font-medium text-center leading-snug">
+                                                      <span className="text-red-400 font-semibold">Registration closes today at 12 PM!</span>{" "}
+                                                      <span className="text-cyan font-mono font-bold">
+                                                            {pad(countdown.hours)}h {pad(countdown.minutes)}m {pad(countdown.seconds)}s
+                                                      </span>
+                                                      <span className="text-white/60"> remaining</span>
+                                                </p>
+                                          </>
+                                    )}
 
-                                    {/* Message */}
-                                    <p className="text-xs sm:text-sm text-white/90 font-medium text-center leading-snug">
-                                          <span className="text-cyan font-semibold">Technical issues</span> regarding payment &amp; presentation template have been{" "}
-                                          <span className="text-green-400 font-semibold">resolved.</span>
-                                    </p>
-
-                                    {/* CTA */}
                                     <button
                                           onClick={(e) => { e.stopPropagation(); setModalOpen(true); }}
                                           id="notice-view-btn"
@@ -103,7 +149,6 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                     </button>
                               </div>
 
-                              {/* Dismiss — always absolute so it doesn't affect layout/height */}
                               <button
                                     onClick={dismiss}
                                     id="notice-dismiss-btn"
@@ -121,10 +166,7 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                               className="fixed inset-0 z-[80] flex items-center justify-center p-4"
                               onClick={() => setModalOpen(false)}
                         >
-                              {/* Backdrop */}
                               <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-
-                              {/* Modal card */}
                               <div
                                     className="relative w-full max-w-lg bg-[hsl(220,20%,6%)] border border-cyan/30 rounded-2xl shadow-[0_0_60px_rgba(6,182,212,0.2)] overflow-hidden animate-in fade-in zoom-in-95 duration-300"
                                     onClick={(e) => e.stopPropagation()}
@@ -134,62 +176,94 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan to-transparent" />
                                           <div className="flex items-center gap-3">
                                                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-cyan/20 border border-cyan/40">
-                                                      <AlertTriangle size={15} className="text-cyan" />
+                                                      {regClosed ? (
+                                                            <Trophy size={15} className="text-amber-400" />
+                                                      ) : (
+                                                            <Clock size={15} className="text-red-400" />
+                                                      )}
                                                 </div>
                                                 <div>
                                                       <h2 className="font-orbitron text-sm font-bold text-white tracking-wide">
-                                                            Official Notice
+                                                            {regClosed ? "Registration Closed" : "Registration Closing Soon"}
                                                       </h2>
                                                       <p className="text-[10px] text-white/40 font-mono mt-0.5">
                                                             CodeCraze 3.0 &middot;{" "}
-                                                            {new Date().toLocaleDateString("en-IN", {
-                                                                  day: "2-digit",
-                                                                  month: "short",
-                                                                  year: "numeric",
-                                                            })}
+                                                            {new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
                                                       </p>
                                                 </div>
-                                                <span className="ml-auto flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-900/50 border border-green-500/30 text-green-400 text-[9px] font-mono tracking-wider uppercase">
-                                                      <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse inline-block" />
-                                                      Resolved
-                                                </span>
+                                                {regClosed ? (
+                                                      <span className="ml-auto flex items-center gap-1 px-2.5 py-1 rounded-full bg-red-900/50 border border-red-500/30 text-red-400 text-[9px] font-mono tracking-wider uppercase">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-red-400 inline-block" />
+                                                            Closed
+                                                      </span>
+                                                ) : (
+                                                      <span className="ml-auto flex items-center gap-1 px-2.5 py-1 rounded-full bg-red-900/50 border border-red-500/30 text-red-400 text-[9px] font-mono tracking-wider uppercase">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse inline-block" />
+                                                            Urgent
+                                                      </span>
+                                                )}
                                           </div>
                                     </div>
 
                                     {/* Body */}
                                     <div className="px-6 py-5 space-y-4">
-                                          <p className="text-sm text-white/80 leading-relaxed">
-                                                The technical issues regarding{" "}
-                                                <span className="text-cyan font-semibold">payment processing</span> and the{" "}
-                                                <span className="text-cyan font-semibold">presentation template</span> have now been
-                                                successfully resolved.
-                                          </p>
-
-                                          <div className="space-y-3">
-                                                <div className="flex items-start gap-3 p-3 rounded-xl bg-green-950/40 border border-green-800/40">
-                                                      <CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" />
-                                                      <p className="text-sm text-white/80 leading-snug">
-                                                            Participants can now{" "}
-                                                            <span className="text-green-400 font-medium">complete the payment process</span>{" "}
-                                                            without any errors.
+                                          {regClosed ? (
+                                                /* ── AFTER 12 PM MODAL BODY ── */
+                                                <>
+                                                      <p className="text-sm text-white/80 leading-relaxed">
+                                                            Registrations for <span className="text-cyan font-semibold">CodeCraze 3.0</span> have officially closed. Thank you to everyone who participated!
                                                       </p>
-                                                </div>
-                                                <div className="flex items-start gap-3 p-3 rounded-xl bg-green-950/40 border border-green-800/40">
-                                                      <CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" />
-                                                      <p className="text-sm text-white/80 leading-snug">
-                                                            The{" "}
-                                                            <span className="text-green-400 font-medium">updated presentation template</span>{" "}
-                                                            is available and working properly.
+                                                      <div className="flex items-start gap-3 p-4 rounded-xl bg-amber-950/40 border border-amber-700/40">
+                                                            <Trophy size={18} className="text-amber-400 flex-shrink-0 mt-0.5" />
+                                                            <div>
+                                                                  <p className="text-sm font-semibold text-amber-300">Results Coming Soon!</p>
+                                                                  <p className="text-xs text-white/60 mt-1 leading-relaxed">
+                                                                        The results will be announced shortly. Stay connected on our WhatsApp community and Instagram for the latest updates.
+                                                                  </p>
+                                                            </div>
+                                                      </div>
+                                                      <div className="flex items-start gap-3 p-3 rounded-xl bg-green-950/40 border border-green-800/40">
+                                                            <CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" />
+                                                            <p className="text-sm text-white/80 leading-snug">
+                                                                  All registered participants have been <span className="text-green-400 font-medium">successfully recorded.</span>
+                                                            </p>
+                                                      </div>
+                                                </>
+                                          ) : (
+                                                /* ── BEFORE 12 PM MODAL BODY ── */
+                                                <>
+                                                      <p className="text-sm text-white/80 leading-relaxed">
+                                                            This is your last chance! Registration for{" "}
+                                                            <span className="text-cyan font-semibold">CodeCraze 3.0</span> closes{" "}
+                                                            <span className="text-red-400 font-semibold">today at 12:00 PM.</span>
                                                       </p>
-                                                </div>
-                                          </div>
 
-                                          <div className="p-3 rounded-xl bg-cyan/5 border border-cyan/20">
-                                                <p className="text-sm text-white/70 leading-relaxed">
-                                                      You may now proceed with your{" "}
-                                                      <span className="text-cyan font-semibold">registration and submission.</span>
-                                                </p>
-                                          </div>
+                                                      {/* Countdown Block */}
+                                                      <div className="p-4 rounded-xl bg-red-950/40 border border-red-700/40 flex flex-col items-center gap-2">
+                                                            <p className="text-[10px] font-mono text-red-400 uppercase tracking-widest">Time Remaining</p>
+                                                            <div className="flex items-center gap-3">
+                                                                  {[
+                                                                        { val: countdown.hours, label: "HRS" },
+                                                                        { val: countdown.minutes, label: "MIN" },
+                                                                        { val: countdown.seconds, label: "SEC" },
+                                                                  ].map(({ val, label }, i) => (
+                                                                        <div key={i} className="flex flex-col items-center">
+                                                                              <span className="font-orbitron text-2xl font-bold text-white tabular-nums">{pad(val)}</span>
+                                                                              <span className="text-[9px] text-red-400/70 tracking-widest font-mono">{label}</span>
+                                                                        </div>
+                                                                  ))}
+                                                            </div>
+                                                      </div>
+
+                                                      <div className="flex items-start gap-3 p-3 rounded-xl bg-cyan/5 border border-cyan/20">
+                                                            <AlertTriangle size={16} className="text-cyan flex-shrink-0 mt-0.5" />
+                                                            <p className="text-sm text-white/80 leading-snug">
+                                                                  Don't miss out — register now before the deadline on{" "}
+                                                                  <span className="text-cyan font-medium">Unstop!</span>
+                                                            </p>
+                                                      </div>
+                                                </>
+                                          )}
 
                                           {/* WhatsApp Community */}
                                           <div className="flex items-center gap-3 p-3 rounded-xl bg-green-900/30 border border-green-600/40">
@@ -233,7 +307,9 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                           </div>
 
                                           <p className="text-xs text-white/40 leading-relaxed border-t border-white/5 pt-3">
-                                                ⚠️ If you still face any issues, please contact the organizing team immediately.
+                                                {regClosed
+                                                      ? "📢 Keep an eye on our WhatsApp community and Instagram for result announcements."
+                                                      : "⚠️ Registrations close at 12:00 PM today. No late entries will be accepted."}
                                           </p>
                                     </div>
 
@@ -249,25 +325,6 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                                       <span>View PPT</span>
                                                       <ExternalLink size={11} />
                                                 </a>
-                                                {/* <a
-                                                      href={INSTAGRAM_LINK}
-                                                      target="_blank"
-                                                      rel="noopener noreferrer"
-                                                      className="flex items-center gap-2 px-3 py-2 rounded-full text-white text-xs font-orbitron font-bold hover:opacity-90 transition-all duration-200"
-                                                      style={{ background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)' }}
-                                                >
-                                                      <Instagram size={11} />
-                                                      <span>Instagram</span>
-                                                </a> */}
-                                                {/* <a
-                                                      href={WHATSAPP_LINK}
-                                                      target="_blank"
-                                                      rel="noopener noreferrer"
-                                                      className="flex items-center gap-2 px-3 py-2 rounded-full border border-green-500/40 bg-green-500/10 text-green-400 text-xs font-orbitron font-bold hover:bg-green-500/20 transition-all duration-200"
-                                                >
-                                                      <MessageCircle size={11} />
-                                                      <span>WhatsApp</span>
-                                                </a> */}
                                           </div>
                                           <button
                                                 onClick={() => setModalOpen(false)}
