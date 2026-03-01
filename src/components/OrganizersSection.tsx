@@ -23,7 +23,7 @@ const OrganizersSection = () => {
               color: "cyan",
             },
             {
-              org: "Fetch AI Club",
+              org: "Fetch.ai Developer Club",
               label: "Managed By",
               badge: "Student Club",
               color: "purple",

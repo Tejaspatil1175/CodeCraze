@@ -50,7 +50,7 @@ const Navbar = ({ bannerHeight = 0 }: NavbarProps) => {
                 <FileText size={14} />
                 <span>Templates</span>
               </a>
-              <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan text-black hover:bg-cyan/80 transition-all duration-300 text-xs font-orbitron font-bold tracking-wide whitespace-nowrap">
+              <a href="https://drive.google.com/file/d/1Bu7mQyYNh2vrX4FciTq8aVelc3Z1kICf/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan text-black hover:bg-cyan/80 transition-all duration-300 text-xs font-orbitron font-bold tracking-wide whitespace-nowrap">
                 <BookOpen size={14} />
                 <span>Rulebook</span>
               </a>
@@ -88,7 +88,7 @@ const Navbar = ({ bannerHeight = 0 }: NavbarProps) => {
               <FileText size={14} />
               <span>Submission Templates</span>
             </a>
-            <a href="#" className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-cyan text-black hover:bg-cyan/80 transition-all text-xs font-orbitron font-bold tracking-wide">
+            <a href="https://drive.google.com/file/d/1Bu7mQyYNh2vrX4FciTq8aVelc3Z1kICf/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-cyan text-black hover:bg-cyan/80 transition-all text-xs font-orbitron font-bold tracking-wide">
               <BookOpen size={14} />
               <span>Brochure & Rulebook</span>
             </a>

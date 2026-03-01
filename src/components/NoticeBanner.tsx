@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Bell, ChevronRight, CheckCircle2, AlertTriangle, ExternalLink, MessageCircle, Instagram, Clock, Trophy } from "lucide-react";
+import { X, Bell, ChevronRight, CheckCircle2, AlertTriangle, ExternalLink, MessageCircle, Instagram, Clock, Trophy, BookOpen } from "lucide-react";
 
 const WHATSAPP_LINK = "https://chat.whatsapp.com/IE6RwQ5yhOx5JfYDu14Hxd";
 const INSTAGRAM_LINK = "https://www.instagram.com/fetch.ai.rcpit/";
+const RULEBOOK_LINK = "https://drive.google.com/file/d/1Bu7mQyYNh2vrX4FciTq8aVelc3Z1kICf/view?usp=sharing";
 
 // Registration closes: March 1 2026, 8:00 PM IST
 const REG_CLOSE_TIME = new Date("2026-03-01T20:00:00+05:30");
@@ -265,6 +266,25 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                                 </>
                                           )}
 
+                                          {/* Rule Book */}
+                                          <a
+                                                href={RULEBOOK_LINK}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-3 p-3 rounded-xl bg-amber-950/40 border border-amber-500/50 hover:border-amber-400 hover:bg-amber-950/60 transition-all duration-200 group"
+                                          >
+                                                <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/40">
+                                                      <BookOpen size={15} className="text-amber-400" />
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                      <p className="text-xs font-semibold text-amber-300">📋 Check the Rule Book!</p>
+                                                      <p className="text-[10px] text-white/50 mt-0.5">Read all rules & guidelines before registering</p>
+                                                </div>
+                                                <span className="flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full bg-amber-500 text-black text-[10px] font-orbitron font-bold group-hover:bg-amber-400 transition-all duration-200 whitespace-nowrap">
+                                                      View <ExternalLink size={9} />
+                                                </span>
+                                          </a>
+
                                           {/* WhatsApp Community */}
                                           <div className="flex items-center gap-3 p-3 rounded-xl bg-green-900/30 border border-green-600/40">
                                                 <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 border border-green-500/40">
@@ -304,7 +324,7 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                                       <span>Follow</span>
                                                       <ExternalLink size={9} />
                                                 </a>
-                                                <a
+                                                {/* <a
                                                       href="https://docs.google.com/presentation/d/1clbR3_r71ku3rxmLdHmAFs6aZPqc2ogo/edit?slide=id.p1#slide=id.p1"
                                                       target="_blank"
                                                       rel="noopener noreferrer"
@@ -313,6 +333,16 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                                       <span>View PPT</span>
                                                       <ExternalLink size={11} />
                                                 </a>
+                                                <a
+                                                      href={RULEBOOK_LINK}
+                                                      target="_blank"
+                                                      rel="noopener noreferrer"
+                                                      className="flex items-center gap-2 px-3 py-2 rounded-full border border-amber-500/50 bg-amber-500/10 text-amber-400 text-xs font-orbitron font-bold hover:bg-amber-500/20 transition-all duration-200"
+                                                >
+                                                      <BookOpen size={11} />
+                                                      <span>Rule Book</span>
+                                                      <ExternalLink size={11} />
+                                                </a> */}
                                           </div>
                                           <button
                                                 onClick={() => setModalOpen(false)}
