@@ -41,7 +41,6 @@ const rounds = [
     icon: Code2,
     color: "purple",
     steps: [
-      "Problem statements revealed on ground",
       "24 hours continuous development",
       "No pre-built code or projects allowed",
       "AI tools allowed with disclosure",
