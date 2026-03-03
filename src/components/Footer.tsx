@@ -8,7 +8,7 @@ const Footer = () => {
           <p className="text-muted-foreground text-sm">Where Ideas Become Reality</p>
         </div>
         <div className="flex flex-col items-center sm:items-end gap-1">
-          <p className="mono text-xs text-muted-foreground">Organized by R. C. Patel Institute of Technology, Shirpur & Fetch AI Club</p>
+          <p className="mono text-xs text-muted-foreground">Organized by R. C. Patel Institute of Technology, Shirpur & Fetch AI  Developers Club</p>
           <p className="mono text-xs text-muted-foreground/60">© 2026 CodeCraze 3.0. All rights reserved.</p>
           <p className="mono text-xs text-muted-foreground/60">Made By Tejas patil</p>
         </div>
