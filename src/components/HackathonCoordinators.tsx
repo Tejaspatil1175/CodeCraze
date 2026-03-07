@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const coordinators = [
       {
-            name: "Vedika Girase",
+            name: "Vedika Girasee",
             role: "Hackathon Coordinator",
             phone: "+91 9370273685",
             email: "vidhi7001@gmail.com",
