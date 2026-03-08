@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Bell, ChevronRight, CheckCircle2, AlertTriangle, ExternalLink, MessageCircle, Instagram, Clock, Trophy, BookOpen, PartyPopper } from "lucide-react";
+import { X, Bell, ChevronRight, CheckCircle2, AlertTriangle, ExternalLink, MessageCircle, Instagram, Clock, Trophy, BookOpen, PartyPopper, Users } from "lucide-react";
 
 const WHATSAPP_LINK = "https://chat.whatsapp.com/IE6RwQ5yhOx5JfYDu14Hxd";
 const INSTAGRAM_LINK = "https://www.instagram.com/fetch.ai.rcpit/";
@@ -113,16 +113,16 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
                                           </div>
                                     </div>
 
-                                    {/* ── Hackathon Day Notice ── */}
+                                    {/* ── Winners Notice ── */}
                                     <>
-                                          <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-400 text-black text-[9px] font-orbitron font-bold tracking-widest uppercase flex-shrink-0 animate-pulse">
-                                                🚀 Live Today
+                                          <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-cyan text-black text-[9px] font-orbitron font-bold tracking-widest uppercase flex-shrink-0 animate-pulse">
+                                                🏆 Result Out
                                           </span>
                                           <p className="text-xs sm:text-sm text-white/90 font-medium text-center leading-snug">
-                                                <span className="text-amber-300 font-semibold">CodeCraze 3.0 – Hackathon Day!</span>{" "}
-                                                <span className="text-cyan font-semibold">Report 8:00–9:30 AM</span>
-                                                <span className="text-white/60"> · Starts </span>
-                                                <span className="text-green-400 font-semibold">10:00 AM Sharp ⚡</span>
+                                                <span className="text-amber-300 font-semibold">CodeCraze 3.0 Winners Declared!</span>{" "}
+                                                <span className="text-cyan font-semibold">Congratulations to all champions!</span>
+                                                <span className="text-white/60"> · View </span>
+                                                <span className="text-green-400 font-semibold">Leaderboard 🚀</span>
                                           </p>
                                     </>
 
@@ -183,39 +183,48 @@ const NoticeBanner = ({ onDismiss, onHeightChange }: NoticeBannerProps) => {
 
                                     {/* Body */}
                                     <div className="px-6 py-5 space-y-4">
-                                          {/* ── Hackathon Day Modal Body ── */}
+                                          {/* ── Winners Modal Body ── */}
                                           <>
-                                                <p className="text-sm text-white/80 leading-relaxed">
-                                                      The big day is finally here! Get ready for{" "}
-                                                      <span className="text-cyan font-semibold">24 hours</span> of innovation, coding &amp; competition at{" "}
-                                                      <span className="text-amber-300 font-semibold">CodeCraze 3.0</span>! 💻⚡
+                                                <div className="text-center py-4">
+                                                      <div className="relative inline-block">
+                                                            <div className="absolute inset-0 bg-amber-500/20 blur-2xl rounded-full animate-pulse" />
+                                                            <Trophy size={64} className="text-amber-400 relative z-10 mx-auto" />
+                                                      </div>
+                                                      <h3 className="mt-4 font-orbitron text-2xl font-black text-white">Winners Declared!</h3>
+                                                      <p className="text-sm text-white/60 mt-1">CodeCraze 3.0 Hackathon Champions</p>
+                                                </div>
+
+                                                <p className="text-sm text-white/80 leading-relaxed text-center">
+                                                      The wait is over! After an incredible 24-hour journey of innovation,
+                                                      we are thrilled to announce the champions of <span className="text-cyan font-semibold">CodeCraze 3.0</span>.
                                                 </p>
 
-                                                {/* Reporting Time */}
-                                                <div className="flex items-start gap-3 p-4 rounded-xl bg-amber-950/40 border border-amber-500/50">
-                                                      <Clock size={18} className="text-amber-400 flex-shrink-0 mt-0.5" />
-                                                      <div className="flex-1">
-                                                            <p className="text-sm font-semibold text-amber-300">📍 Reporting Time</p>
-                                                            <p className="text-lg font-orbitron font-bold text-white mt-1">8:00 AM – 9:30 AM</p>
-                                                            <p className="text-xs text-white/50 mt-0.5">All teams must complete check-in before the hackathon begins.</p>
-                                                      </div>
-                                                </div>
+                                                <div className="flex flex-col gap-3">
+                                                      <button
+                                                            onClick={() => {
+                                                                  setModalOpen(false);
+                                                                  window.location.hash = "#winners";
+                                                            }}
+                                                            className="w-full flex items-center justify-between gap-3 p-4 rounded-xl bg-cyan/10 border border-cyan/40 hover:bg-cyan/20 transition-all group"
+                                                      >
+                                                            <div className="flex items-center gap-3">
+                                                                  <div className="w-10 h-10 rounded-full bg-cyan/20 flex items-center justify-center">
+                                                                        <Users size={20} className="text-cyan" />
+                                                                  </div>
+                                                                  <div className="text-left">
+                                                                        <p className="text-sm font-bold text-white">View Winners List</p>
+                                                                        <p className="text-[10px] text-white/40">Check out the top teams and their projects</p>
+                                                                  </div>
+                                                            </div>
+                                                            <ChevronRight size={18} className="text-cyan group-hover:translate-x-1 transition-transform" />
+                                                      </button>
 
-                                                {/* Start Time */}
-                                                <div className="flex items-start gap-3 p-4 rounded-xl bg-green-950/40 border border-green-600/50">
-                                                      <Trophy size={18} className="text-green-400 flex-shrink-0 mt-0.5" />
-                                                      <div className="flex-1">
-                                                            <p className="text-sm font-semibold text-green-300">⏰ Hackathon Start Time</p>
-                                                            <p className="text-lg font-orbitron font-bold text-white mt-1">10:00 AM <span className="text-green-400 text-sm">(Sharp)</span></p>
-                                                            <p className="text-xs text-white/50 mt-0.5">The clock starts ticking — be on time!</p>
+                                                      <div className="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/10">
+                                                            <PartyPopper size={18} className="text-purple-400 flex-shrink-0 mt-0.5" />
+                                                            <p className="text-xs text-white/60 leading-snug">
+                                                                  A huge congratulations to all 50+ participants who showcased amazing talent and spirit!
+                                                            </p>
                                                       </div>
-                                                </div>
-
-                                                <div className="flex items-start gap-3 p-3 rounded-xl bg-cyan/5 border border-cyan/20">
-                                                      <CheckCircle2 size={16} className="text-cyan flex-shrink-0 mt-0.5" />
-                                                      <p className="text-sm text-white/80 leading-snug">
-                                                            Stay tuned on our <span className="text-green-400 font-medium">WhatsApp</span> &amp; <span className="text-pink-400 font-medium">Instagram</span> for live updates!
-                                                      </p>
                                                 </div>
                                           </>
 

@@ -6,6 +6,7 @@ import OrganizersSection from "@/components/OrganizersSection";
 import HackathonCoordinators from "@/components/HackathonCoordinators";
 // import ClubLeads from "@/components/ClubLeads";
 import PrizeSection from "@/components/PrizeSection";
+import WinnersSection from "@/components/WinnersSection";
 import TeamSection from "@/components/TeamSection";
 import DomainsSection from "@/components/DomainsSection";
 import HackathonFlow from "@/components/HackathonFlow";
@@ -28,6 +29,7 @@ const Index = () => {
         <HeroSection />
         <OrganizersSection />
         <PrizeSection />
+        <WinnersSection />
         <TeamSection />
         <DomainsSection />
         <HackathonFlow />
